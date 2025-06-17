@@ -83,19 +83,8 @@ public class Main {
                     addCategory(currUser);
                 }
                 case 2 -> {
-                    listOfCategories();
-                    System.out.print("Enter category 'ID': ");
-                    String id = scannerStr.nextLine();
+                    getAllCategories();
 
-                    List<Category> categories = categoryService.getChildCategories(UUID.fromString(id));
-                    if (categories.isEmpty()) {
-                        System.out.println("This category has no sub category :(");
-                    } else {
-                        System.out.println("Categories: ");
-                        for (Category category : categories) {
-                            System.out.println(category);
-                        }
-                    }
                 }
                 case 3 -> {
                     UUID id = chooseParentCategory();
@@ -143,6 +132,40 @@ public class Main {
             }
         }
 
+    }
+
+    private static void getAllCategories() {
+        System.out.println("""
+                1. only child categories
+                2. child categories with sub categories 
+                """);
+        int choice = scannerInt.nextInt();
+            listOfCategories();
+            System.out.print("Enter category 'ID': ");
+            String id = scannerStr.nextLine();
+        if (choice == 1){
+            List<Category> categories = categoryService.getChildCategories(UUID.fromString(id));
+            if (categories.isEmpty()) {
+                System.out.println("This category has no sub category :(");
+            } else {
+                System.out.println("Categories: ");
+                for (Category category : categories) {
+                    System.out.println(category);
+                }
+            }
+        } else if (choice == 2) {
+            List<Category> categories = categoryService.getCategories();
+            Set<UUID>AllCategories = categoryService.getSubCategories(UUID.fromString(id));
+            for (Category category : categories) {
+                if (AllCategories.contains(category.getCatId())){
+                    System.out.println(category);
+                }
+            }
+
+
+        } else {
+            System.out.println("Invalid comment");
+        }
     }
 
     private static void deleteProduct(User currUser) {

@@ -1,1 +1,7 @@
-[ ]
+[ {
+  "id" : "e28f0f01-3635-45e8-a8ac-1771f9142faa",
+  "name" : "samsung s1",
+  "price" : 1000.0,
+  "categoryId" : "02df69e8-eaaf-4872-b4d4-d3208db28f35",
+  "amount" : 10
+} ]
