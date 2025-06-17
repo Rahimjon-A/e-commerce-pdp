@@ -1,0 +1,20 @@
+<Users>
+  <user>
+    <userId>974c225a-6e71-4faa-8d7b-a4c19b7166d8</userId>
+    <fullName>Rahimjon</fullName>
+    <userName>rahim</userName>
+    <phoneNumber>123</phoneNumber>
+    <password>123</password>
+    <role>ADMIN</role>
+    <cardId/>
+  </user>
+  <user>
+    <userId>4cd3a979-0445-4ddc-8902-37b52fb92607</userId>
+    <fullName>Abu</fullName>
+    <userName>abu</userName>
+    <phoneNumber>123</phoneNumber>
+    <password>123</password>
+    <role>USER</role>
+    <cardId/>
+  </user>
+</Users>

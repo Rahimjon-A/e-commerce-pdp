@@ -1,0 +1,25 @@
+<Categories>
+  <category>
+    <catId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</catId>
+    <catName>Texnika</catName>
+  </category>
+  <category>
+    <catId>56de3e0b-9d55-46ef-a25b-9cc90cd63fb1</catId>
+    <catName>Home</catName>
+  </category>
+  <category>
+    <catId>02df69e8-eaaf-4872-b4d4-d3208db28f35</catId>
+    <catName>Phones</catName>
+    <parentId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</parentId>
+  </category>
+  <category>
+    <catId>15a7818f-9f0b-4058-92be-588a6bb95770</catId>
+    <catName>Samsung</catName>
+    <parentId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</parentId>
+  </category>
+  <category>
+    <catId>3a78b9ee-37a0-4322-baca-0c32ead7d6df</catId>
+    <catName>Kitchen</catName>
+    <parentId>56de3e0b-9d55-46ef-a25b-9cc90cd63fb1</parentId>
+  </category>
+</Categories>
