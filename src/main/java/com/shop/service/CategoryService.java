@@ -59,6 +59,7 @@ public class CategoryService {
         return set;
     }
 
+
     private void getSubCategories(UUID id, Set<UUID> catsToDel) {
         catsToDel.add(id);
         for (Category category : categories) {
