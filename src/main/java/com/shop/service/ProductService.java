@@ -53,9 +53,11 @@ public class ProductService {
         return false;
     }
 
-    public Product getProductByName(String name) {
+    public Product getProductByName(String name,int quantity) {
         for (Product product : products) {
-            if(product.getName().equals(name)) {
+            if(product.getName().equals(name) && quantity <= product.getAmount()) {
+                product.setAmount(product.getAmount() - quantity);
+                update();
                 return product;
             }
         }

@@ -357,17 +357,19 @@ public class Main {
                 }
                 System.out.print("Choose product (enter product name): ");
                 String name = scannerStr.nextLine();
-                Product seletctedProduct = productService.getProductByName(name);
-                System.out.println(seletctedProduct);
+
+                System.out.print("How many or How Much do you want: ");
+                int quantity = scannerInt.nextInt();
+
+                Product seletctedProduct = productService.getProductByName(name,quantity);
+                //System.out.println(seletctedProduct);
+
 
                 if (seletctedProduct != null) {
-                    System.out.print("How many or How Much do you want: ");
-                    int quantity = scannerInt.nextInt();
-
                     newCard.getOrders().add(new Order(seletctedProduct, quantity));
                     System.out.println("Product is added to bucket!");
                 } else {
-                    System.out.println("No product found :(");
+                    System.out.println("No product found or not enough product:(");
                 }
 
             }
