@@ -16,6 +16,8 @@ public class Main {
     static CategoryService categoryService = new CategoryService(productService);
     static CardService cardService = new CardService();
 
+
+
     public static void main(String[] args) {
 
         int stepCode = 10;
