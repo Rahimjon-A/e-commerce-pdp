@@ -53,6 +53,17 @@ public class ProductService {
         return false;
     }
 
+    public String addProductAmount(String name,int amount){
+        for(Product product : products) {
+            if(product.getName().equals(name )&& amount > 0) {
+                product.setAmount(product.getAmount() + amount);
+                update();
+                return product.getName() + " has been added new " + amount +" item.";
+            }
+        }
+        return "Product not found";
+    }
+
     public Product getProductByName(String name,int quantity) {
         for (Product product : products) {
             if(product.getName().equals(name) && quantity <= product.getAmount()) {

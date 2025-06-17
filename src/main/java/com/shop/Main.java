@@ -1,10 +1,12 @@
 package com.shop;
 
 import com.shop.model.*;
+import com.shop.model.wrapper.UserWrapper;
 import com.shop.service.CardService;
 import com.shop.service.CategoryService;
 import com.shop.service.ProductService;
 import com.shop.service.UserService;
+import com.shop.utility.FileUtility;
 
 import java.util.*;
 
@@ -72,11 +74,12 @@ public class Main {
                     2. Get Child Categories By Id
                     3. Delete Category
                     4. Add product
-                    5. Get Products By Category
-                    6. Delete Product
-                    7. List of Category
-                    8. List of Products
-                    9. Exit
+                    5. Add amount for a product
+                    6. Get Products By Category
+                    7. Delete Product
+                    8. List of Category
+                    9. List of Products
+                    0. Exit
                     """);
             switch (scannerInt.nextInt()) {
                 case 1 -> {
@@ -95,35 +98,30 @@ public class Main {
                     addProduct(currUser);
                 }
                 case 5 -> {
-                    getProductsBycategoryId();
+                    listOfProducts();
+
+                    System.out.print("Enter product name: ");
+                    String productName = scannerStr.nextLine();
+                    System.out.print("Enter product amount: ");
+                    int productAmount = scannerInt.nextInt();
+
+                    String res = productService.addProductAmount(productName, productAmount);
+                    System.out.println(res);
                 }
                 case 6 -> {
-                    deleteProduct(currUser);
+                    getProductsBycategoryId();
                 }
                 case 7 -> {
-                    listOfCategories();
+                    deleteProduct(currUser);
                 }
                 case 8 -> {
-                    List<Product> products = productService.getProducts();
-                    if (products.isEmpty()) {
-                        System.out.println("No product yet!");
-                    } else {
-                        System.out.println("Products list:");
-                        System.out.println("------------------");
-                        for (Product product : products) {
-                            Category category = categoryService.getCategoryById(product.getCategoryId());
-                            System.out.printf("""
-                                    Name: %s
-                                    Price: %S
-                                    Amount: %d
-                                    Category: %s
-                                    ------------------
-                                    \n""", product.getName(), product.getPrice(), product.getAmount(), (category != null ? category.getCatName() : "Head"));
-                        }
-                    }
-
+                    listOfCategories();
                 }
                 case 9 -> {
+                    listOfProducts();
+
+                }
+                case 0 -> {
                     stepCode = 0;
                 }
                 default -> {
@@ -134,41 +132,7 @@ public class Main {
 
     }
 
-    private static void getAllCategories() {
-        System.out.println("""
-                1. only child categories
-                2. child categories with sub categories 
-                """);
-        int choice = scannerInt.nextInt();
-            listOfCategories();
-            System.out.print("Enter category 'ID': ");
-            String id = scannerStr.nextLine();
-        if (choice == 1){
-            List<Category> categories = categoryService.getChildCategories(UUID.fromString(id));
-            if (categories.isEmpty()) {
-                System.out.println("This category has no sub category :(");
-            } else {
-                System.out.println("Categories: ");
-                for (Category category : categories) {
-                    System.out.println(category);
-                }
-            }
-        } else if (choice == 2) {
-            List<Category> categories = categoryService.getCategories();
-            Set<UUID>AllCategories = categoryService.getSubCategories(UUID.fromString(id));
-            for (Category category : categories) {
-                if (AllCategories.contains(category.getCatId())){
-                    System.out.println(category);
-                }
-            }
-
-
-        } else {
-            System.out.println("Invalid comment");
-        }
-    }
-
-    private static void deleteProduct(User currUser) {
+    private static void listOfProducts() {
         List<Product> products = productService.getProducts();
         if (products.isEmpty()) {
             System.out.println("No product yet!");
@@ -186,9 +150,63 @@ public class Main {
                         \n""", product.getName(), product.getPrice(), product.getAmount(), (category != null ? category.getCatName() : "Head"));
             }
         }
+    }
+
+    private static void getAllCategories() {
+        System.out.println("""
+                1. only child categories
+                2. child categories with sub categories 
+                """);
+        int choice = scannerInt.nextInt();
+        listOfCategories();
+        System.out.print("Enter category 'ID': ");
+        String id = scannerStr.nextLine();
+        if (choice == 1) {
+            List<Category> categories = categoryService.getChildCategories(UUID.fromString(id));
+            if (categories.isEmpty()) {
+                System.out.println("This category has no sub category :(");
+            } else {
+                System.out.println("Categories: ");
+                for (Category category : categories) {
+                    System.out.println(category);
+                }
+            }
+        } else if (choice == 2) {
+            List<Category> categories = categoryService.getCategories();
+            Set<UUID> AllCategories = categoryService.getSubCategories(UUID.fromString(id));
+            for (Category category : categories) {
+                if (AllCategories.contains(category.getCatId())) {
+                    System.out.println(category);
+                }
+            }
+
+
+        } else {
+            System.out.println("Invalid comment");
+        }
+    }
+
+    private static void deleteProduct(User currUser) {
+        List<Product> products = productService.getProducts();
+        if (products.isEmpty()) {
+            System.out.println("No product yet!");
+        } else {
+            System.out.println("Products list:");
+            System.out.println("-----------------");
+            for (Product product : products) {
+                Category category = categoryService.getCategoryById(product.getCategoryId());
+                System.out.printf("""
+                        Name: %s
+                        Price: %S
+                        Amount: %d
+                        Category: %s
+                        ------------------
+                        \n""", product.getName(), product.getPrice(), product.getAmount(), (category != null ? category.getCatName() : "Head"));
+            }
+        }
         System.out.print("Enter product name: ");
         boolean res = productService.deleteProductByName(scannerStr.nextLine());
-        System.out.println("Product is " +(res ? "deteled!" : "not found"));
+        System.out.println("Product is " + (res ? "deteled!" : "not found"));
 
     }
 
@@ -361,7 +379,7 @@ public class Main {
                 System.out.print("How many or How Much do you want: ");
                 int quantity = scannerInt.nextInt();
 
-                Product seletctedProduct = productService.getProductByName(name,quantity);
+                Product seletctedProduct = productService.getProductByName(name, quantity);
                 //System.out.println(seletctedProduct);
 
 
