@@ -24,11 +24,28 @@ public class CardService {
 
     public List<Card> getCardsByUserId(UUID id) {
         List<Card> res = new ArrayList<>();
+
         for (Card card : cards) {
-            if(card.getUserId().equals(id)) {
+            if(card.getUserId().equals(id) && !card.isOrder()) {
                 res.add(card);
             }
         }
         return res;
     }
+
+    public List<Card> getOrdersByUserId(UUID id){
+        List<Card> res = new ArrayList<>();
+
+        for (Card card : cards) {
+            if (card.getUserId().equals(id) && card.isOrder()){
+                res.add(card);
+            }
+        }
+        return res;
+    }
+
+    public void update() {
+        FileUtility.saveFileToJson(CARD_FILE, cards);
+    }
+
 }
