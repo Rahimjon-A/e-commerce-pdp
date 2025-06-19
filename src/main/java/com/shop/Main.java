@@ -324,7 +324,9 @@ public class Main {
             System.out.println("""
                     1. Create card
                     2. List of cards
-                    3. Exit
+                    3. Order from Card
+                    4. Orders List
+                    5. Exit
                     """);
             switch (scannerInt.nextInt()) {
                 case 1 -> {
@@ -343,6 +345,30 @@ public class Main {
                     }
                 }
                 case 3 -> {
+                    cardService.getCardsByUserId(currUser.getUserId());
+                    orderedProduct(currUser);
+                }
+                case 4 -> {
+                        List<Card> orders = cardService.getOrdersByUserId(currUser.getUserId());
+                    System.out.printf("User: %s \n", currUser.getUserName());
+                    System.out.println("Orders: ");
+                    int c = 1;
+                        for (Card order : orders) {
+                            System.out.printf("""
+                                          №: %d
+                                          ------------------
+                                    """,c++);
+                            for (Order orderOrder : order.getOrders()) {
+                                System.out.printf("""
+                                            prductName: %s
+                                            price: %s
+                                            quantity: %s
+                                            --------------
+                                        """,orderOrder.getProductName(),orderOrder.getPrice(),orderOrder.getQuantity());
+                            }
+                    }
+                }
+                case 5 -> {
                     stepCode = 0;
                 }
                 default -> {
@@ -350,6 +376,46 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static void orderedProduct(User currUser) {
+        List<Card> cards = cardService.getCardsByUserId(currUser.getUserId());
+//        System.out.println(cards);
+        int c = 1;
+        for (Card card : cards) {
+//                System.out.println(c++ + ". " + card);
+//                System.out.println(card);
+            System.out.printf("""
+                            No: %s
+                            userName: %s
+                            ----------------
+                            """, c++,
+                    currUser.getUserName());
+            for (Order order : card.getOrders()) {
+                System.out.println("Cards: ");
+                System.out.printf("""
+                            productName: %s
+                            productPrice: %s
+                            productQuantity: %s
+                            --------------------
+                        """,order.getProductName(),order.getPrice(),order.getQuantity());
+            }
+
+        }
+
+        System.out.println("which card do you want to order");
+        c = scannerInt.nextInt();
+        int idx = c -1;
+        if (idx < 0 || idx < cards.size()) {
+            Card card = cards.get(idx);
+            card.setOrder(true);
+            cardService.update();
+            System.out.println("Ordered");
+        } else {
+            System.out.println("Invalid command");
+        }
+
+
     }
 
     private static void shoppingCard(User currUser) {
