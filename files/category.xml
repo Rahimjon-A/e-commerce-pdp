@@ -8,23 +8,18 @@
     <catName>Home</catName>
   </category>
   <category>
-    <catId>02df69e8-eaaf-4872-b4d4-d3208db28f35</catId>
-    <catName>Phones</catName>
-    <parentId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</parentId>
-  </category>
-  <category>
-    <catId>15a7818f-9f0b-4058-92be-588a6bb95770</catId>
-    <catName>Samsung</catName>
-    <parentId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</parentId>
-  </category>
-  <category>
     <catId>3a78b9ee-37a0-4322-baca-0c32ead7d6df</catId>
     <catName>Kitchen</catName>
     <parentId>56de3e0b-9d55-46ef-a25b-9cc90cd63fb1</parentId>
   </category>
   <category>
-    <catId>fca3a2c4-e00d-4e1f-b889-6b918ddb1040</catId>
-    <catName>apple</catName>
-    <parentId>02df69e8-eaaf-4872-b4d4-d3208db28f35</parentId>
+    <catId>840680a8-0c92-4cdf-a65b-6ff8af3f51fb</catId>
+    <catName>Apple</catName>
+    <parentId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</parentId>
+  </category>
+  <category>
+    <catId>f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3</catId>
+    <catName>Samsung</catName>
+    <parentId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</parentId>
   </category>
 </Categories>

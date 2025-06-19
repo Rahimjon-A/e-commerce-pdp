@@ -3,5 +3,23 @@
   "name" : "samsung s1",
   "price" : 1000.0,
   "categoryId" : "02df69e8-eaaf-4872-b4d4-d3208db28f35",
-  "amount" : 50
+  "amount" : 5
+}, {
+  "id" : "e282600d-5f8a-4140-abcc-54077a3a66a0",
+  "name" : "washing machine",
+  "price" : 400.0,
+  "categoryId" : "3a78b9ee-37a0-4322-baca-0c32ead7d6df",
+  "amount" : 19
+}, {
+  "id" : "6f9d190a-511a-4b86-a90d-bbd38f205339",
+  "name" : "Sansung s25",
+  "price" : 500.0,
+  "categoryId" : "840680a8-0c92-4cdf-a65b-6ff8af3f51fb",
+  "amount" : 20
+}, {
+  "id" : "eff030db-9cfe-48dc-b3f4-0af127f0cbde",
+  "name" : "flip 3",
+  "price" : 400.0,
+  "categoryId" : "f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3",
+  "amount" : 20
 } ]
