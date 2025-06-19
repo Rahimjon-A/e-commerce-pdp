@@ -11,6 +11,7 @@ import com.shop.utility.FileUtility;
 import java.util.*;
 
 public class Main {
+
     static Scanner scannerInt = new Scanner(System.in);
     static Scanner scannerStr = new Scanner(System.in);
     static UserService userService = new UserService();
@@ -22,6 +23,7 @@ public class Main {
 
         int stepCode = 10;
         while (stepCode != 0) {
+
             System.out.println("""
                     1. Register
                     2. Login
@@ -30,6 +32,7 @@ public class Main {
 
             switch (scannerInt.nextInt()) {
                 case 1 -> {
+
                     System.out.print("Enter your full name: ");
                     String fullName = scannerStr.nextLine();
                     System.out.print("Enter your user name: ");
@@ -38,18 +41,21 @@ public class Main {
                     String phone = scannerStr.nextLine();
                     System.out.print("Enter password: ");
                     String password = scannerStr.nextLine();
+
                     boolean res = userService.register(new User(fullName, userName, phone, password));
-                    System.out.println("Register " + (res ? "Successfull" : "failed"));
+                    System.out.println("Register " + (res ? "Successfully" : "failed"));
                 }
                 case 2 -> {
+
                     System.out.print("Enter user name: ");
                     String phone = scannerStr.nextLine();
                     System.out.print("Enter password: ");
                     String password = scannerStr.nextLine();
 
                     User currUser = userService.login(phone, password);
+
                     if (currUser != null) {
-                        System.out.println("Loged in!");
+                        System.out.println("Logged in!");
                         if (currUser.getRole() == Role.USER) {
                             userMenu(currUser);
                         } else {
@@ -67,8 +73,10 @@ public class Main {
     }
 
     private static void adminMenu(User currUser) {
+
         int stepCode = 10;
         while (stepCode != 0) {
+            System.out.println("");
             System.out.println("""
                     1. Add category
                     2. Get Child Categories By Id
@@ -82,6 +90,7 @@ public class Main {
                     0. Exit
                     """);
             switch (scannerInt.nextInt()) {
+
                 case 1 -> {
                     addCategory(currUser);
                 }
@@ -90,6 +99,7 @@ public class Main {
 
                 }
                 case 3 -> {
+
                     UUID id = chooseParentCategory();
                     boolean res = categoryService.deleteCategory(id);
                     System.out.println("category is " + (res ? "deleted!" : "not deleted!"));
@@ -98,6 +108,7 @@ public class Main {
                     addProduct(currUser);
                 }
                 case 5 -> {
+
                     listOfProducts();
 
                     System.out.print("Enter product name: ");
@@ -109,7 +120,7 @@ public class Main {
                     System.out.println(res);
                 }
                 case 6 -> {
-                    getProductsBycategoryId();
+                    getProductsByCategoryId();
                 }
                 case 7 -> {
                     deleteProduct(currUser);
@@ -153,6 +164,7 @@ public class Main {
     }
 
     private static void getAllCategories() {
+
         System.out.println("""
                 1. only child categories
                 2. child categories with sub categories 
@@ -161,28 +173,32 @@ public class Main {
         listOfCategories();
         System.out.print("Enter category 'ID': ");
         String id = scannerStr.nextLine();
-        if (choice == 1) {
-            List<Category> categories = categoryService.getChildCategories(UUID.fromString(id));
-            if (categories.isEmpty()) {
-                System.out.println("This category has no sub category :(");
+
+        try {
+            UUID categoryId = UUID.fromString(id);
+            if (choice == 1) {
+                List<Category> categories = categoryService.getChildCategories(categoryId);
+                if (categories.isEmpty()) {
+                    System.out.println("This category has no sub category :(");
+                } else {
+                    System.out.println("Sub categories: ");
+                    for (Category category : categories) {
+                        System.out.println("- " + category.getCatName());
+                    }
+                }
+            } else if (choice == 2) {
+                Set<UUID> allSubCategories = categoryService.getSubCategories(categoryId);
+                System.out.println("All subcategories: ");
+                for (Category category : categoryService.getCategories()) {
+                    if (allSubCategories.contains(category.getCatId()) && !category.getCatId().equals(categoryId)) {
+                        System.out.println("- " + category.getCatName());
+                    }
+                }
             } else {
-                System.out.println("Categories: ");
-                for (Category category : categories) {
-                    System.out.println(category);
-                }
+                System.out.println("Invalid choice");
             }
-        } else if (choice == 2) {
-            List<Category> categories = categoryService.getCategories();
-            Set<UUID> AllCategories = categoryService.getSubCategories(UUID.fromString(id));
-            for (Category category : categories) {
-                if (AllCategories.contains(category.getCatId())) {
-                    System.out.println(category);
-                }
-            }
-
-
-        } else {
-            System.out.println("Invalid comment");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid UUID format! Please enter correct category ID");
         }
     }
 
@@ -206,7 +222,7 @@ public class Main {
         }
         System.out.print("Enter product name: ");
         boolean res = productService.deleteProductByName(scannerStr.nextLine());
-        System.out.println("Product is " + (res ? "deteled!" : "not found"));
+        System.out.println("Product is " + (res ? "deleted!" : "not found"));
 
     }
 
@@ -214,15 +230,33 @@ public class Main {
         List<Category> cats = categoryService.getCategories();
         if (cats.isEmpty()) {
             System.out.println("Here is not category yet!");
-        } else {
-            System.out.println("Gategories: ");
-            for (Category cat : cats) {
-                System.out.println(cat);
+            return;
+        }
+
+        Map<UUID, List<Category>> childMap = new HashMap<>();
+        List<Category> rootCategories = new ArrayList<>();
+
+        for (Category cat : cats) {
+            if (cat.getParentId() == null) {
+                rootCategories.add(cat);
+            } else {
+                childMap.computeIfAbsent(cat.getParentId(), k -> new ArrayList<>()).add(cat);
             }
         }
+
+        System.out.println("\nCATEGORIES:");
+        System.out.println("============");
+        for (Category rootCat : rootCategories) {
+            System.out.println("- " + rootCat.getCatName() + " (ID: " + rootCat.getCatId() + ")");
+            List<Category> children = childMap.getOrDefault(rootCat.getCatId(), new ArrayList<>());
+            for (Category child : children) {
+                System.out.println("  └─ " + child.getCatName() + " (ID: " + child.getCatId() + ")");
+            }
+        }
+        System.out.println("============");
     }
 
-    private static void getProductsBycategoryId() {
+    private static void getProductsByCategoryId() {
         UUID catId = chooseParentCategory();
         Set<UUID> catsId = categoryService.getSubCategories(catId);
         Category category = categoryService.getCategoryById(catId);
@@ -380,7 +414,7 @@ public class Main {
                 int quantity = scannerInt.nextInt();
 
                 Product seletctedProduct = productService.getProductByName(name, quantity);
-                //System.out.println(seletctedProduct);
+
 
 
                 if (seletctedProduct != null) {

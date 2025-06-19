@@ -1,6 +1,5 @@
 package com.shop.service;
 
-
 import com.shop.model.Category;
 import com.shop.model.wrapper.CategoryWrapper;
 import com.shop.utility.FileUtility;
@@ -10,6 +9,8 @@ import java.util.*;
 
 @Getter
 public class CategoryService {
+
+
     private static final String CATEGORY_FILE = "./files/category.xml";
     private final List<Category> categories;
     private final ProductService productService;
@@ -19,6 +20,7 @@ public class CategoryService {
         CategoryWrapper wrapper = FileUtility.loadFileFromXML(CATEGORY_FILE, CategoryWrapper.class);
         categories = wrapper != null ? wrapper.getCategories() : new ArrayList<>();
     }
+
 
     public boolean addCategory(String name, UUID parentId) {
         for (Category category : categories) {
@@ -31,6 +33,7 @@ public class CategoryService {
         FileUtility.saveFileToXML(CATEGORY_FILE, new CategoryWrapper(categories));
         return true;
     }
+
 
     public Category getCategoryById(UUID id) {
         for (Category category : categories) {

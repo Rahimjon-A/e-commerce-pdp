@@ -22,4 +22,10 @@
   "price" : 400.0,
   "categoryId" : "f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3",
   "amount" : 20
+}, {
+  "id" : "94696acb-9dc3-4a81-b939-7f9f5c213514",
+  "name" : "Samsung S25 Ultro pro max faks",
+  "price" : 1.0E7,
+  "categoryId" : "840680a8-0c92-4cdf-a65b-6ff8af3f51fb",
+  "amount" : 90
 } ]
