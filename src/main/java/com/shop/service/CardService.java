@@ -1,3 +1,4 @@
+
 package com.shop.service;
 
 import com.shop.model.Card;
@@ -9,17 +10,25 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
+
 public class CardService {
+
     private static final String CARD_FILE = "./files/cards.json";
+
     private final List<Card> cards;
 
     public CardService() {
+
         cards = FileUtility.loadFileFromJson(CARD_FILE, Card.class);
+
     }
 
     public void addCard(Card card) {
+
         cards.add(card);
+
         FileUtility.saveFileToJson(CARD_FILE, cards);
+
     }
 
     public List<Card> getCardsByUserId(UUID id) {
@@ -31,4 +40,5 @@ public class CardService {
         }
         return res;
     }
+
 }
