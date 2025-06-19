@@ -96,7 +96,6 @@ public class Main {
                 }
                 case 2 -> {
                     getAllCategories();
-
                 }
                 case 3 -> {
 
@@ -308,11 +307,13 @@ public class Main {
 
     private static UUID chooseParentCategory() {
         UUID currId = null;
+        Stack<UUID> showCategories = new Stack<>();
 
         while (true) {
             UUID finalId = currId;
             List<Category> categories = categoryService.getCategories();
             List<Category> children = new ArrayList<>();
+
 
             for (Category category : categories) {
                 if (Objects.equals(category.getParentId(), finalId)) {
@@ -334,20 +335,31 @@ public class Main {
                 for (Category child : children) {
                     System.out.println(c++ + ". " + child.getCatName());
                 }
-            } else {
-                System.out.println("This category is empty, please press 0!");
             }
-
+                System.out.println("to go back, enter 99");
             System.out.print("Select category: ");
             int res = scannerInt.nextInt();
 
-            if (res == 0) return currId;
+            if (res == 0) {
+                showCategories = null;
+                return currId;
+            }
 
-            int idx = res - 1;
-            if (idx >= 0 && idx < children.size()) {
-                currId = children.get(idx).getCatId();
+            if (res == 99) {
+                if (showCategories.isEmpty()) {
+                    currId = null;
+                } else {
+                    currId = showCategories.pop();
+                }
             } else {
-                System.out.println("Invalid command!");
+                int idx = res - 1;
+                if (idx >= 0 && idx < children.size()) {
+                    showCategories.push(currId);
+                    currId = children.get(idx).getCatId();
+                } else {
+                    System.out.println("Invalid command!");
+                }
+
             }
         }
     }

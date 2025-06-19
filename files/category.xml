@@ -22,4 +22,29 @@
     <catName>Samsung</catName>
     <parentId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</parentId>
   </category>
+  <category>
+    <catId>d913afda-a5d2-46e5-9fbe-34264d760da8</catId>
+    <catName>ferf</catName>
+    <parentId>840680a8-0c92-4cdf-a65b-6ff8af3f51fb</parentId>
+  </category>
+  <category>
+    <catId>7b5854f1-56ec-4ebe-98b5-75cee884b2a2</catId>
+    <catName>Iphone 16 pro</catName>
+    <parentId>840680a8-0c92-4cdf-a65b-6ff8af3f51fb</parentId>
+  </category>
+  <category>
+    <catId>863b2218-933f-4242-b166-1287ae82e087</catId>
+    <catName>Iphone 16 pro max</catName>
+    <parentId>840680a8-0c92-4cdf-a65b-6ff8af3f51fb</parentId>
+  </category>
+  <category>
+    <catId>e6b09a0f-9ab1-42bf-b9ee-edf30177d025</catId>
+    <catName>Samsung s25</catName>
+    <parentId>f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3</parentId>
+  </category>
+  <category>
+    <catId>749d2316-db18-4d0c-90db-27a89f5ab16f</catId>
+    <catName>Samsung s25 ultra</catName>
+    <parentId>f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3</parentId>
+  </category>
 </Categories>
