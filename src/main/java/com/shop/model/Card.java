@@ -9,9 +9,11 @@ import java.util.UUID;
 @Data
 public class Card {
     private UUID userId;
+    private boolean isOrder;
     private List<Order> orders;
 
     public  Card() {
         orders = new ArrayList<>();
+        isOrder = false;
     }
 }

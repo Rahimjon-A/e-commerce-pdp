@@ -1,38 +1,42 @@
 [ {
   "userId" : "4cd3a979-0445-4ddc-8902-37b52fb92607",
   "orders" : [ {
-    "productId" : "e28f0f01-3635-45e8-a8ac-1771f9142faa",
-    "productName" : "samsung s1",
-    "price" : 1000.0,
-    "quantity" : 5
-  } ]
-}, {
-  "userId" : "4cd3a979-0445-4ddc-8902-37b52fb92607",
-  "orders" : [ {
-    "productId" : "e28f0f01-3635-45e8-a8ac-1771f9142faa",
-    "productName" : "samsung s1",
-    "price" : 1000.0,
-    "quantity" : 5
-  } ]
-}, {
-  "userId" : "4cd3a979-0445-4ddc-8902-37b52fb92607",
-  "orders" : [ {
-    "productId" : "e28f0f01-3635-45e8-a8ac-1771f9142faa",
-    "productName" : "samsung s1",
-    "price" : 1000.0,
-    "quantity" : 5
-  } ]
-}, {
-  "userId" : "4cd3a979-0445-4ddc-8902-37b52fb92607",
-  "orders" : [ {
-    "productId" : "eff030db-9cfe-48dc-b3f4-0af127f0cbde",
-    "productName" : "flip 3",
-    "price" : 400.0,
-    "quantity" : 50
+    "productId" : "f527a38a-cf64-4ecf-a721-ccb1ab151816",
+    "productName" : "s1",
+    "price" : 10000.0,
+    "quantity" : 1
   }, {
+    "productId" : "eef024f5-fc4f-46ec-8c59-0c9b2c80dd7d",
+    "productName" : "s2",
+    "price" : 20000.0,
+    "quantity" : 1
+  } ],
+  "order" : true
+}, {
+  "userId" : "4cd3a979-0445-4ddc-8902-37b52fb92607",
+  "orders" : [ {
     "productId" : "e282600d-5f8a-4140-abcc-54077a3a66a0",
     "productName" : "washing machine",
     "price" : 400.0,
     "quantity" : 1
-  } ]
+  } ],
+  "order" : false
+}, {
+  "userId" : "4cd3a979-0445-4ddc-8902-37b52fb92607",
+  "orders" : [ {
+    "productId" : "eef024f5-fc4f-46ec-8c59-0c9b2c80dd7d",
+    "productName" : "s2",
+    "price" : 20000.0,
+    "quantity" : 2
+  } ],
+  "order" : true
+}, {
+  "userId" : "4cd3a979-0445-4ddc-8902-37b52fb92607",
+  "orders" : [ {
+    "productId" : "f527a38a-cf64-4ecf-a721-ccb1ab151816",
+    "productName" : "s1",
+    "price" : 10000.0,
+    "quantity" : 5
+  } ],
+  "order" : true
 } ]
