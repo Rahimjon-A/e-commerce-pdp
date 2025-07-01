@@ -1,0 +1,30 @@
+[ {
+  "userId" : "4cd3a979-0445-4ddc-8902-37b52fb92607",
+  "orders" : [ {
+    "productId" : "9ec867a9-0e38-4368-8f33-ee88e564d3ea",
+    "productName" : "s25",
+    "price" : 1200.0,
+    "quantity" : 1,
+    "createdAt" : 1751353277530,
+    "createdBy" : "abu"
+  }, {
+    "productId" : "c3b53f0d-5b9d-4ed6-8070-7bc37c27458e",
+    "productName" : "printer",
+    "price" : 100.0,
+    "quantity" : 10,
+    "createdAt" : 1751353291432,
+    "createdBy" : "abu"
+  } ],
+  "order" : true
+}, {
+  "userId" : "4cd3a979-0445-4ddc-8902-37b52fb92607",
+  "orders" : [ {
+    "productId" : "086e3326-2bbe-4f86-b799-40992c1e8d39",
+    "productName" : "monitor",
+    "price" : 200.0,
+    "quantity" : 1,
+    "createdAt" : 1751354370526,
+    "createdBy" : "abu"
+  } ],
+  "order" : false
+} ]

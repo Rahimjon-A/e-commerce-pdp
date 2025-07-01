@@ -1,13 +1,14 @@
 package com.shop;
 
 import com.shop.model.*;
-import com.shop.model.wrapper.UserWrapper;
 import com.shop.service.CardService;
 import com.shop.service.CategoryService;
 import com.shop.service.ProductService;
 import com.shop.service.UserService;
-import com.shop.utility.FileUtility;
+import com.shop.utility.DateUtility;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Main {
@@ -108,15 +109,18 @@ public class Main {
                 }
                 case 5 -> {
 
-                    listOfProducts();
+                    boolean hasProduct = listOfProducts();
 
-                    System.out.print("Enter product name: ");
-                    String productName = scannerStr.nextLine();
-                    System.out.print("Enter product amount: ");
-                    int productAmount = scannerInt.nextInt();
+                    if (hasProduct) {
+                        System.out.print("Enter product name: ");
+                        String productName = scannerStr.nextLine();
+                        System.out.print("Enter product amount: ");
+                        int productAmount = scannerInt.nextInt();
 
-                    String res = productService.addProductAmount(productName, productAmount);
-                    System.out.println(res);
+                        String res = productService.addProductAmount(productName, productAmount);
+                        System.out.println(res);
+                    }
+
                 }
                 case 6 -> {
                     getProductsByCategoryId();
@@ -142,23 +146,27 @@ public class Main {
 
     }
 
-    private static void listOfProducts() {
+    private static boolean listOfProducts() {
         List<Product> products = productService.getProducts();
         if (products.isEmpty()) {
             System.out.println("No product yet!");
+            return false;
         } else {
             System.out.println("Products list:");
-            System.out.println("------------------");
+            System.out.println("——————————————————");
             for (Product product : products) {
                 Category category = categoryService.getCategoryById(product.getCategoryId());
                 System.out.printf("""
                         Name: %s
                         Price: %S
                         Amount: %d
+                        CreatedBy: %s
+                        CreatedAt: %s
                         Category: %s
-                        ------------------
-                        \n""", product.getName(), product.getPrice(), product.getAmount(), (category != null ? category.getCatName() : "Head"));
+                        ——————————————————
+                        \n""", product.getName(), product.getPrice(), product.getAmount(), product.getCreatedBy(), DateUtility.formatMyDate(product.getCreatedAt()), (category != null ? category.getCatName() : "Head"));
             }
+            return true;
         }
     }
 
@@ -202,23 +210,7 @@ public class Main {
     }
 
     private static void deleteProduct(User currUser) {
-        List<Product> products = productService.getProducts();
-        if (products.isEmpty()) {
-            System.out.println("No product yet!");
-        } else {
-            System.out.println("Products list:");
-            System.out.println("-----------------");
-            for (Product product : products) {
-                Category category = categoryService.getCategoryById(product.getCategoryId());
-                System.out.printf("""
-                        Name: %s
-                        Price: %S
-                        Amount: %d
-                        Category: %s
-                        ------------------
-                        \n""", product.getName(), product.getPrice(), product.getAmount(), (category != null ? category.getCatName() : "Head"));
-            }
-        }
+        listOfProducts();
         System.out.print("Enter product name: ");
         boolean res = productService.deleteProductByName(scannerStr.nextLine());
         System.out.println("Product is " + (res ? "deleted!" : "not found"));
@@ -226,34 +218,20 @@ public class Main {
     }
 
     private static void listOfCategories() {
-        List<Category> cats = categoryService.getCategories();
-        if (cats.isEmpty()) {
-            System.out.println("Here is not category yet!");
-            return;
-        }
-
-        Map<UUID, List<Category>> childMap = new HashMap<>();
-        List<Category> rootCategories = new ArrayList<>();
-
-        for (Category cat : cats) {
-            if (cat.getParentId() == null) {
-                rootCategories.add(cat);
-            } else {
-                childMap.computeIfAbsent(cat.getParentId(), k -> new ArrayList<>()).add(cat);
-            }
-        }
-
+        List<Category> categories = categoryService.getCategories();
         System.out.println("\nCATEGORIES:");
-        System.out.println("============");
-        for (Category rootCat : rootCategories) {
-            System.out.println("- " + rootCat.getCatName() + " (ID: " + rootCat.getCatId() + ")");
-            List<Category> children = childMap.getOrDefault(rootCat.getCatId(), new ArrayList<>());
-            for (Category child : children) {
-                System.out.println("  └─ " + child.getCatName() + " (ID: " + child.getCatId() + ")");
-            }
+        System.out.println("================================================");
+        for (Category category : categories) {
+            System.out.printf("""
+                    —— %s (ID: %s)
+                       created by: %s
+                       created at: %s
+                       ————————————————————————————————————————————————
+                    """, category.getCatName(), category.getCatId(), category.getCreatedBy(), DateUtility.formatMyDate(category.getCreatedAt()));
         }
-        System.out.println("============");
+        System.out.println("================================================");
     }
+
 
     private static void getProductsByCategoryId() {
         UUID catId = chooseParentCategory();
@@ -291,7 +269,7 @@ public class Main {
         System.out.print("Enter amount: ");
         int amount = scannerInt.nextInt();
 
-        boolean res = productService.addProduct(new Product(name, price, amount, catId));
+        boolean res = productService.addProduct(new Product(name, price, amount, catId, currUser.getUserName(), new Date()));
         System.out.println("Product is " + (res ? "added!" : "not added!"));
     }
 
@@ -301,7 +279,7 @@ public class Main {
         System.out.print("Enter new category name: ");
         String catName = scannerStr.nextLine();
 
-        boolean added = categoryService.addCategory(catName, parentId);
+        boolean added = categoryService.addCategory(new Category(catName, currUser.getUserName(), new Date(), parentId));
         System.out.println("Category " + (added ? "added!" : "failed (duplicate?)"));
     }
 
@@ -336,7 +314,7 @@ public class Main {
                     System.out.println(c++ + ". " + child.getCatName());
                 }
             }
-                System.out.println("to go back, enter 99");
+            System.out.println("99. ⏎ (back)");
             System.out.print("Select category: ");
             int res = scannerInt.nextInt();
 
@@ -368,7 +346,7 @@ public class Main {
         int stepCode = 10;
         while (stepCode != 0) {
             System.out.println("""
-                    1. Create card
+                    1. Add to card
                     2. List of cards
                     3. Order from Card
                     4. Orders List
@@ -395,23 +373,23 @@ public class Main {
                     orderedProduct(currUser);
                 }
                 case 4 -> {
-                        List<Card> orders = cardService.getOrdersByUserId(currUser.getUserId());
+                    List<Card> orders = cardService.getOrdersByUserId(currUser.getUserId());
                     System.out.printf("User: %s \n", currUser.getUserName());
                     System.out.println("Orders: ");
                     int c = 1;
-                        for (Card order : orders) {
+                    for (Card order : orders) {
+                        System.out.printf("""
+                                      №: %d
+                                      ------------------
+                                """, c++);
+                        for (Order orderOrder : order.getOrders()) {
                             System.out.printf("""
-                                          №: %d
-                                          ------------------
-                                    """,c++);
-                            for (Order orderOrder : order.getOrders()) {
-                                System.out.printf("""
-                                            prductName: %s
-                                            price: %s
-                                            quantity: %s
-                                            --------------
-                                        """,orderOrder.getProductName(),orderOrder.getPrice(),orderOrder.getQuantity());
-                            }
+                                        prductName: %s
+                                        price: %s
+                                        quantity: %s
+                                        --------------
+                                    """, orderOrder.getProductName(), orderOrder.getPrice(), orderOrder.getQuantity());
+                        }
                     }
                 }
                 case 5 -> {
@@ -426,32 +404,32 @@ public class Main {
 
     private static void orderedProduct(User currUser) {
         List<Card> cards = cardService.getCardsByUserId(currUser.getUserId());
-//        System.out.println(cards);
         int c = 1;
         for (Card card : cards) {
-//                System.out.println(c++ + ". " + card);
-//                System.out.println(card);
+            double totalPrice = 0;
             System.out.printf("""
-                            No: %s
+                            Order №: %s
                             userName: %s
-                            ----------------
+                            ————————————————————
                             """, c++,
                     currUser.getUserName());
+                System.out.println("Products: ");
             for (Order order : card.getOrders()) {
-                System.out.println("Cards: ");
+                totalPrice += order.getPrice() * order.getQuantity();
                 System.out.printf("""
                             productName: %s
                             productPrice: %s
                             productQuantity: %s
-                            --------------------
-                        """,order.getProductName(),order.getPrice(),order.getQuantity());
+                            ————————————————————
+                        """, order.getProductName(), order.getPrice(), order.getQuantity());
             }
-
+            System.out.println("Total price: " +totalPrice);
+            System.out.println("=======================\n");
         }
 
-        System.out.println("which card do you want to order");
+        System.out.print("Enter order number: ");
         c = scannerInt.nextInt();
-        int idx = c -1;
+        int idx = c - 1;
         if (idx < 0 || idx < cards.size()) {
             Card card = cards.get(idx);
             card.setOrder(true);
@@ -480,9 +458,10 @@ public class Main {
                 int c = 1;
                 for (Product product : products) {
                     System.out.printf("""
-                            No %d | %s
+                            № %d | %s
                             price: %s
                             remaining: %d
+                            ——————————————————
                             """, c++, product.getName(), product.getPrice(), product.getAmount());
                 }
                 System.out.print("Choose product (enter product name): ");
@@ -494,9 +473,8 @@ public class Main {
                 Product seletctedProduct = productService.getProductByName(name, quantity);
 
 
-
                 if (seletctedProduct != null) {
-                    newCard.getOrders().add(new Order(seletctedProduct, quantity));
+                    newCard.getOrders().add(new Order(seletctedProduct, quantity, new Date(), currUser.getUserName()));
                     System.out.println("Product is added to bucket!");
                 } else {
                     System.out.println("No product found or not enough product:(");

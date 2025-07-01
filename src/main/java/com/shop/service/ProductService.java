@@ -25,14 +25,12 @@ public class ProductService {
                 return false;
             }
         }
-
         products.add(product);
-        FileUtility.saveFileToJson(PRODUCT_FILE, products);
+        this.update();
         return true;
     }
 
     public List<Product> getProductsByCategory(Set<UUID> catsId) {
-
         List<Product> catProducts = new ArrayList<>();
         for (Product product : products) {
             if(catsId.contains(product.getCategoryId())){
@@ -46,7 +44,7 @@ public class ProductService {
         for (Product product : products) {
             if(product.getName().equals(name)) {
                 products.remove(product);
-                FileUtility.saveFileToJson(PRODUCT_FILE, products);
+                this.update();
                 return true;
             }
         }
@@ -57,7 +55,7 @@ public class ProductService {
         for(Product product : products) {
             if(product.getName().equals(name )&& amount > 0) {
                 product.setAmount(product.getAmount() + amount);
-                update();
+                this.update();
                 return product.getName() + " has been added new " + amount +" item.";
             }
         }
@@ -68,7 +66,7 @@ public class ProductService {
         for (Product product : products) {
             if(product.getName().equals(name) && quantity <= product.getAmount()) {
                 product.setAmount(product.getAmount() - quantity);
-                update();
+                this.update();
                 return product;
             }
         }

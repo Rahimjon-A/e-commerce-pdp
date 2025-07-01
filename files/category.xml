@@ -1,50 +1,48 @@
 <Categories>
   <category>
-    <catId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</catId>
-    <catName>Texnika</catName>
-  </category>
-  <category>
-    <catId>56de3e0b-9d55-46ef-a25b-9cc90cd63fb1</catId>
+    <catId>f22d7d52-1673-4ace-a113-c1d1b1b0330b</catId>
     <catName>Home</catName>
+    <createdBy>rahim</createdBy>
+    <createdAt>1750920062105</createdAt>
   </category>
   <category>
-    <catId>3a78b9ee-37a0-4322-baca-0c32ead7d6df</catId>
+    <catId>e2bb32de-b4f4-4aae-9310-5e56140463e8</catId>
+    <catName>Work</catName>
+    <createdBy>rahim</createdBy>
+    <createdAt>1750920086179</createdAt>
+  </category>
+  <category>
+    <catId>2c8b906e-c9e9-42c1-bdf7-eb0a518a603d</catId>
+    <catName>Texnika</catName>
+    <createdBy>rahim</createdBy>
+    <createdAt>1750920129611</createdAt>
+  </category>
+  <category>
+    <catId>fdaa96c1-4beb-4e4d-bfbb-a1b35e7098f1</catId>
+    <catName>Phones</catName>
+    <createdBy>rahim</createdBy>
+    <createdAt>1750920151333</createdAt>
+    <parentId>2c8b906e-c9e9-42c1-bdf7-eb0a518a603d</parentId>
+  </category>
+  <category>
+    <catId>18ccf75f-c091-4442-bf47-dc143f969dc6</catId>
+    <catName>Laptops</catName>
+    <createdBy>rahim</createdBy>
+    <createdAt>1750920167632</createdAt>
+    <parentId>2c8b906e-c9e9-42c1-bdf7-eb0a518a603d</parentId>
+  </category>
+  <category>
+    <catId>c9290823-6096-4eef-8e01-1ac2308127fa</catId>
     <catName>Kitchen</catName>
-    <parentId>56de3e0b-9d55-46ef-a25b-9cc90cd63fb1</parentId>
+    <createdBy>rahim</createdBy>
+    <createdAt>1750920901507</createdAt>
+    <parentId>f22d7d52-1673-4ace-a113-c1d1b1b0330b</parentId>
   </category>
   <category>
-    <catId>840680a8-0c92-4cdf-a65b-6ff8af3f51fb</catId>
-    <catName>Apple</catName>
-    <parentId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</parentId>
-  </category>
-  <category>
-    <catId>f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3</catId>
+    <catId>181e042f-b743-4ecc-8f59-35afaf63e7fc</catId>
     <catName>Samsung</catName>
-    <parentId>8c735cd8-2a6a-4b8e-9068-e5eecbb66d73</parentId>
-  </category>
-  <category>
-    <catId>d913afda-a5d2-46e5-9fbe-34264d760da8</catId>
-    <catName>ferf</catName>
-    <parentId>840680a8-0c92-4cdf-a65b-6ff8af3f51fb</parentId>
-  </category>
-  <category>
-    <catId>7b5854f1-56ec-4ebe-98b5-75cee884b2a2</catId>
-    <catName>Iphone 16 pro</catName>
-    <parentId>840680a8-0c92-4cdf-a65b-6ff8af3f51fb</parentId>
-  </category>
-  <category>
-    <catId>863b2218-933f-4242-b166-1287ae82e087</catId>
-    <catName>Iphone 16 pro max</catName>
-    <parentId>840680a8-0c92-4cdf-a65b-6ff8af3f51fb</parentId>
-  </category>
-  <category>
-    <catId>e6b09a0f-9ab1-42bf-b9ee-edf30177d025</catId>
-    <catName>Samsung s25</catName>
-    <parentId>f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3</parentId>
-  </category>
-  <category>
-    <catId>749d2316-db18-4d0c-90db-27a89f5ab16f</catId>
-    <catName>Samsung s25 ultra</catName>
-    <parentId>f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3</parentId>
+    <createdBy>rahim</createdBy>
+    <createdAt>1750922032002</createdAt>
+    <parentId>fdaa96c1-4beb-4e4d-bfbb-a1b35e7098f1</parentId>
   </category>
 </Categories>

@@ -1,37 +1,41 @@
 [ {
-  "id" : "e28f0f01-3635-45e8-a8ac-1771f9142faa",
-  "name" : "samsung s1",
-  "price" : 1000.0,
-  "categoryId" : "02df69e8-eaaf-4872-b4d4-d3208db28f35",
-  "amount" : 5
+  "id" : "bbe2ce74-7927-46a8-a9bf-33a2b3c6c983",
+  "name" : "bmw m5",
+  "price" : 125000.0,
+  "categoryId" : null,
+  "amount" : 0,
+  "createdBy" : "rahim",
+  "createdAt" : 1750923481805
 }, {
-  "id" : "e282600d-5f8a-4140-abcc-54077a3a66a0",
+  "id" : "5f29ee24-ccf4-4a75-b110-d642fcc8a3af",
   "name" : "washing machine",
   "price" : 400.0,
-  "categoryId" : "3a78b9ee-37a0-4322-baca-0c32ead7d6df",
-  "amount" : 18
+  "categoryId" : "f22d7d52-1673-4ace-a113-c1d1b1b0330b",
+  "amount" : 30,
+  "createdBy" : "rahim",
+  "createdAt" : 1750924878148
 }, {
-  "id" : "6f9d190a-511a-4b86-a90d-bbd38f205339",
-  "name" : "Sansung s25",
-  "price" : 500.0,
-  "categoryId" : "840680a8-0c92-4cdf-a65b-6ff8af3f51fb",
-  "amount" : 20
+  "id" : "086e3326-2bbe-4f86-b799-40992c1e8d39",
+  "name" : "monitor",
+  "price" : 200.0,
+  "categoryId" : "e2bb32de-b4f4-4aae-9310-5e56140463e8",
+  "amount" : 16,
+  "createdBy" : "rahim",
+  "createdAt" : 1750924904407
 }, {
-  "id" : "eff030db-9cfe-48dc-b3f4-0af127f0cbde",
-  "name" : "flip 3",
-  "price" : 400.0,
-  "categoryId" : "f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3",
-  "amount" : 20
+  "id" : "c3b53f0d-5b9d-4ed6-8070-7bc37c27458e",
+  "name" : "printer",
+  "price" : 100.0,
+  "categoryId" : "2c8b906e-c9e9-42c1-bdf7-eb0a518a603d",
+  "amount" : 8,
+  "createdBy" : "rahim",
+  "createdAt" : 1750924986259
 }, {
-  "id" : "f527a38a-cf64-4ecf-a721-ccb1ab151816",
-  "name" : "s1",
-  "price" : 10000.0,
-  "categoryId" : "f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3",
-  "amount" : 4
-}, {
-  "id" : "eef024f5-fc4f-46ec-8c59-0c9b2c80dd7d",
-  "name" : "s2",
-  "price" : 20000.0,
-  "categoryId" : "f5f3ba1a-b1dd-4bd4-a197-c58a7f1339b3",
-  "amount" : 0
+  "id" : "9ec867a9-0e38-4368-8f33-ee88e564d3ea",
+  "name" : "s25",
+  "price" : 1200.0,
+  "categoryId" : "181e042f-b743-4ecc-8f59-35afaf63e7fc",
+  "amount" : 6,
+  "createdBy" : "rahim",
+  "createdAt" : 1750925016037
 } ]

@@ -9,8 +9,6 @@ import java.util.*;
 
 @Getter
 public class CategoryService {
-
-
     private static final String CATEGORY_FILE = "./files/category.xml";
     private final List<Category> categories;
     private final ProductService productService;
@@ -22,18 +20,17 @@ public class CategoryService {
     }
 
 
-    public boolean addCategory(String name, UUID parentId) {
+    public boolean addCategory(Category newCategory) {
         for (Category category : categories) {
-            if(category.getCatName().equals(name) && Objects.equals(category.getParentId(), parentId)) {
+            if(category.getCatName().equals(newCategory.getCatName()) && Objects.equals(category.getParentId(), newCategory.getCatId())) {
                 return false;
             }
         }
 
-        categories.add(new Category(name, parentId));
-        FileUtility.saveFileToXML(CATEGORY_FILE, new CategoryWrapper(categories));
+        categories.add(newCategory);
+        this.update();
         return true;
     }
-
 
     public Category getCategoryById(UUID id) {
         for (Category category : categories) {
@@ -52,7 +49,7 @@ public class CategoryService {
         categories.removeIf(category -> catsToDel.contains(category.getCatId()));
         productService.getProducts().removeIf(product -> catsToDel.contains(product.getCategoryId()));
         productService.update();
-        FileUtility.saveFileToXML(CATEGORY_FILE, new CategoryWrapper(categories));
+        this.update();
         return true;
     }
 
@@ -80,6 +77,10 @@ public class CategoryService {
             }
         }
         return children;
+    }
+
+    public void update() {
+        FileUtility.saveFileToXML(CATEGORY_FILE, new CategoryWrapper(categories));
     }
 
 }

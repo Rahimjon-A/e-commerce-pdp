@@ -7,6 +7,8 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @Getter
 public class UserService {
@@ -16,7 +18,7 @@ public class UserService {
     private final List<User> users;
 
     public UserService() {
-         UserWrapper wrapper = FileUtility.loadFileFromXML(USER_FILE, UserWrapper.class);
+        UserWrapper wrapper = FileUtility.loadFileFromXML(USER_FILE, UserWrapper.class);
         this.users = wrapper != null ? wrapper.getUsers() : new ArrayList<>();
     }
 
@@ -43,11 +45,9 @@ public class UserService {
     }
 
     public User getUserByUserName(String userName) {
-        for (User user : users) {
-            if(user.getUserName().equals(userName)) {
-                return user;
-            }
-        }
-        return null;
+        return users.stream()
+                .filter(user -> user.getUserName().equals(userName))
+                .findFirst()
+                .orElse(null);
     }
 }
