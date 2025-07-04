@@ -11,7 +11,7 @@
   "name" : "washing machine",
   "price" : 400.0,
   "categoryId" : "f22d7d52-1673-4ace-a113-c1d1b1b0330b",
-  "amount" : 30,
+  "amount" : 3,
   "createdBy" : "rahim",
   "createdAt" : 1750924878148
 }, {
@@ -19,7 +19,7 @@
   "name" : "monitor",
   "price" : 200.0,
   "categoryId" : "e2bb32de-b4f4-4aae-9310-5e56140463e8",
-  "amount" : 16,
+  "amount" : 12,
   "createdBy" : "rahim",
   "createdAt" : 1750924904407
 }, {
@@ -27,7 +27,7 @@
   "name" : "printer",
   "price" : 100.0,
   "categoryId" : "2c8b906e-c9e9-42c1-bdf7-eb0a518a603d",
-  "amount" : 8,
+  "amount" : 7,
   "createdBy" : "rahim",
   "createdAt" : 1750924986259
 }, {
@@ -35,7 +35,7 @@
   "name" : "s25",
   "price" : 1200.0,
   "categoryId" : "181e042f-b743-4ecc-8f59-35afaf63e7fc",
-  "amount" : 6,
+  "amount" : 0,
   "createdBy" : "rahim",
   "createdAt" : 1750925016037
 } ]

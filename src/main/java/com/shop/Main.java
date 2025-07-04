@@ -7,8 +7,7 @@ import com.shop.service.ProductService;
 import com.shop.service.UserService;
 import com.shop.utility.DateUtility;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.*;
 
 public class Main {
@@ -358,18 +357,9 @@ public class Main {
                 }
                 case 2 -> {
                     List<Card> userCards = cardService.getCardsByUserId(currUser.getUserId());
-
-                    if (userCards.isEmpty()) {
-                        System.out.println("You don't have cards yet!");
-                    } else {
-                        System.out.println("YOUR CARDS");
-                        for (Card userCard : userCards) {
-                            System.out.println(userCard);
-                        }
-                    }
+                    printUserCards(userCards, currUser);
                 }
                 case 3 -> {
-                    cardService.getCardsByUserId(currUser.getUserId());
                     orderedProduct(currUser);
                 }
                 case 4 -> {
@@ -384,11 +374,12 @@ public class Main {
                                 """, c++);
                         for (Order orderOrder : order.getOrders()) {
                             System.out.printf("""
-                                        prductName: %s
+                                        productName: %s
                                         price: %s
                                         quantity: %s
+                                        created at: %s
                                         --------------
-                                    """, orderOrder.getProductName(), orderOrder.getPrice(), orderOrder.getQuantity());
+                                    """, orderOrder.getProductName(), orderOrder.getPrice(), orderOrder.getQuantity(), DateUtility.formatMyDate(orderOrder.getCreatedAt()));
                         }
                     }
                 }
@@ -404,42 +395,52 @@ public class Main {
 
     private static void orderedProduct(User currUser) {
         List<Card> cards = cardService.getCardsByUserId(currUser.getUserId());
+        printUserCards(cards, currUser);
+        if (!cards.isEmpty()) {
+            System.out.print("Enter order number: ");
+            int idx = scannerInt.nextInt() - 1;
+            if (idx < 0 || idx < cards.size()) {
+                Card card = cards.get(idx);
+                card.setOrder(true);
+                cardService.update();
+                System.out.println("Ordered");
+            } else {
+                System.out.println("Invalid command");
+            }
+        }
+    }
+
+    private static void printUserCards(List<Card> cards, User currUser) {
         int c = 1;
+        if (cards.isEmpty()) {
+            System.out.println("You don't have cards yet!");
+            return;
+        }
+
         for (Card card : cards) {
             double totalPrice = 0;
             System.out.printf("""
-                            Order №: %s
+                            Cart №: %s
                             userName: %s
+                            Order state: %s
                             ————————————————————
                             """, c++,
-                    currUser.getUserName());
-                System.out.println("Products: ");
+                    currUser.getUserName(), (card.isOrder() ? "Ordered" : "in basket"));
+
+            System.out.println("Products: ");
             for (Order order : card.getOrders()) {
                 totalPrice += order.getPrice() * order.getQuantity();
                 System.out.printf("""
                             productName: %s
                             productPrice: %s
                             productQuantity: %s
+                            Date: %s
                             ————————————————————
-                        """, order.getProductName(), order.getPrice(), order.getQuantity());
+                        """, order.getProductName(), order.getPrice(), order.getQuantity(), DateUtility.formatMyDate(order.getCreatedAt()));
             }
-            System.out.println("Total price: " +totalPrice);
+            System.out.println("Total price: " + totalPrice);
             System.out.println("=======================\n");
         }
-
-        System.out.print("Enter order number: ");
-        c = scannerInt.nextInt();
-        int idx = c - 1;
-        if (idx < 0 || idx < cards.size()) {
-            Card card = cards.get(idx);
-            card.setOrder(true);
-            cardService.update();
-            System.out.println("Ordered");
-        } else {
-            System.out.println("Invalid command");
-        }
-
-
     }
 
     private static void shoppingCard(User currUser) {

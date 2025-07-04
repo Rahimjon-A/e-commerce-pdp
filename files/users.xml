@@ -24,6 +24,24 @@
     <phoneNumber>aaa</phoneNumber>
     <password>123</password>
     <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>4ed45d48-a7ad-4411-9273-75464c0a27ff</userId>
+    <fullName>a</fullName>
+    <userName>a</userName>
+    <phoneNumber>1</phoneNumber>
+    <password>1</password>
+    <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>0f5e06a5-077c-436a-8434-6d3e43a80d98</userId>
+    <fullName>q</fullName>
+    <userName>q</userName>
+    <phoneNumber>3</phoneNumber>
+    <password>3</password>
+    <role>USER</role>
     <cardId/>
   </user>
 </Users>

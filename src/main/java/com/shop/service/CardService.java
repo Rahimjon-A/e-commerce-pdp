@@ -2,9 +2,11 @@
 package com.shop.service;
 
 import com.shop.model.Card;
+import com.shop.model.Order;
 import com.shop.utility.FileUtility;
 import lombok.Getter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -28,9 +30,8 @@ public class CardService {
 
     public List<Card> getCardsByUserId(UUID id) {
         List<Card> res = new ArrayList<>();
-
         for (Card card : cards) {
-            if(card.getUserId().equals(id) && !card.isOrder()) {
+            if (card.getUserId().equals(id) && !card.isOrder()) {
                 res.add(card);
             }
         }
