@@ -24,6 +24,15 @@
     <phoneNumber>aaa</phoneNumber>
     <password>123</password>
     <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>958b3000-460d-4a03-9b32-183ed2b4ff1f</userId>
+    <fullName>aa</fullName>
+    <userName>aa</userName>
+    <phoneNumber>aa</phoneNumber>
+    <password>aa</password>
+    <role>USER</role>
     <cardId/>
   </user>
 </Users>

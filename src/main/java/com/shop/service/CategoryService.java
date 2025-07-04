@@ -13,7 +13,7 @@ public class CategoryService {
     private final List<Category> categories;
     private final ProductService productService;
 
-    public  CategoryService(ProductService productService) {
+    public CategoryService(ProductService productService) {
         this.productService = productService;
         CategoryWrapper wrapper = FileUtility.loadFileFromXML(CATEGORY_FILE, CategoryWrapper.class);
         categories = wrapper != null ? wrapper.getCategories() : new ArrayList<>();
@@ -21,11 +21,12 @@ public class CategoryService {
 
 
     public boolean addCategory(Category newCategory) {
-        for (Category category : categories) {
-            if(category.getCatName().equals(newCategory.getCatName()) && Objects.equals(category.getParentId(), newCategory.getCatId())) {
-                return false;
-            }
-        }
+
+        boolean b = categories.stream()
+                .anyMatch(category ->
+                        category.getCatName().equals(newCategory.getCatName()) && Objects.equals(category.getParentId(), newCategory.getCatId()));
+
+        if (b) return false;
 
         categories.add(newCategory);
         this.update();
@@ -33,22 +34,20 @@ public class CategoryService {
     }
 
     public Category getCategoryById(UUID id) {
-        for (Category category : categories) {
-            if(Objects.equals(category.getCatId(), id)) {
-                return category;
-            }
-        }
-        return null;
+        return categories.stream()
+                .filter(category -> Objects.equals(category.getCatId(), id))
+                .findFirst()
+                .orElse(null);
     }
 
     public boolean deleteCategory(UUID id) {
-        if(id == null) return false;
+        if (id == null) return false;
 
         Set<UUID> catsToDel = getSubCategories(id);
 
         categories.removeIf(category -> catsToDel.contains(category.getCatId()));
-        productService.getProducts().removeIf(product -> catsToDel.contains(product.getCategoryId()));
-        productService.update();
+        productService.deleteCategoryProducts(catsToDel);
+
         this.update();
         return true;
     }
@@ -59,28 +58,22 @@ public class CategoryService {
         return set;
     }
 
-
     private void getSubCategories(UUID id, Set<UUID> catsToDel) {
         catsToDel.add(id);
         for (Category category : categories) {
-            if(Objects.equals(id, category.getParentId())) {
+            if (Objects.equals(id, category.getParentId())) {
                 getSubCategories(category.getCatId(), catsToDel);
             }
         }
     }
 
     public List<Category> getChildCategories(UUID id) {
-        List<Category> children = new ArrayList<>();
-        for (Category category : categories) {
-            if(Objects.equals(category.getParentId(), id)) {
-                children.add(category);
-            }
-        }
-        return children;
+        return categories.stream()
+                .filter(category -> Objects.equals(category.getParentId(), id))
+                .toList();
     }
 
     public void update() {
         FileUtility.saveFileToXML(CATEGORY_FILE, new CategoryWrapper(categories));
     }
-
 }

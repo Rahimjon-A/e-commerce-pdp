@@ -8,6 +8,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @Getter
 
@@ -27,25 +28,12 @@ public class CardService {
     }
 
     public List<Card> getCardsByUserId(UUID id) {
-        List<Card> res = new ArrayList<>();
-
-        for (Card card : cards) {
-            if(card.getUserId().equals(id) && !card.isOrder()) {
-                res.add(card);
-            }
-        }
-        return res;
+        return cards.stream().filter(card -> card.getUserId().equals(id) && !card.isOrder()).toList();
     }
 
-    public List<Card> getOrdersByUserId(UUID id){
-        List<Card> res = new ArrayList<>();
+    public List<Card> getOrdersByUserId(UUID id) {
+        return cards.stream().filter(card -> card.getUserId().equals(id) && card.isOrder()).toList();
 
-        for (Card card : cards) {
-            if (card.getUserId().equals(id) && card.isOrder()){
-                res.add(card);
-            }
-        }
-        return res;
     }
 
     public void update() {
