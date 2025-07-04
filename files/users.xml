@@ -27,6 +27,7 @@
     <cardId>00000000-0000-0000-0000-000000000000</cardId>
   </user>
   <user>
+<<<<<<< HEAD
     <userId>4ed45d48-a7ad-4411-9273-75464c0a27ff</userId>
     <fullName>a</fullName>
     <userName>a</userName>
@@ -41,6 +42,13 @@
     <userName>q</userName>
     <phoneNumber>3</phoneNumber>
     <password>3</password>
+=======
+    <userId>958b3000-460d-4a03-9b32-183ed2b4ff1f</userId>
+    <fullName>aa</fullName>
+    <userName>aa</userName>
+    <phoneNumber>aa</phoneNumber>
+    <password>aa</password>
+>>>>>>> ebf30c10dd439fa714c631e92e330334f6dce157
     <role>USER</role>
     <cardId/>
   </user>

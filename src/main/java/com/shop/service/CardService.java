@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @Getter
 
@@ -29,6 +30,7 @@ public class CardService {
     }
 
     public List<Card> getCardsByUserId(UUID id) {
+<<<<<<< HEAD
         List<Card> res = new ArrayList<>();
         for (Card card : cards) {
             if (card.getUserId().equals(id) && !card.isOrder()) {
@@ -36,17 +38,14 @@ public class CardService {
             }
         }
         return res;
+=======
+        return cards.stream().filter(card -> card.getUserId().equals(id) && !card.isOrder()).toList();
+>>>>>>> ebf30c10dd439fa714c631e92e330334f6dce157
     }
 
-    public List<Card> getOrdersByUserId(UUID id){
-        List<Card> res = new ArrayList<>();
+    public List<Card> getOrdersByUserId(UUID id) {
+        return cards.stream().filter(card -> card.getUserId().equals(id) && card.isOrder()).toList();
 
-        for (Card card : cards) {
-            if (card.getUserId().equals(id) && card.isOrder()){
-                res.add(card);
-            }
-        }
-        return res;
     }
 
     public void update() {

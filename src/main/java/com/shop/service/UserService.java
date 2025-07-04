@@ -27,7 +27,7 @@ public class UserService {
             return false;
         }
         users.add(user);
-        FileUtility.saveFileToXML(USER_FILE, new UserWrapper(users));
+        this.update();
         return true;
     }
 
@@ -40,14 +40,14 @@ public class UserService {
     }
 
 
-    public void update() {
-        FileUtility.saveFileToXML(USER_FILE, new UserWrapper(users));
-    }
-
     public User getUserByUserName(String userName) {
         return users.stream()
                 .filter(user -> user.getUserName().equals(userName))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void update() {
+        FileUtility.saveFileToXML(USER_FILE, new UserWrapper(users));
     }
 }

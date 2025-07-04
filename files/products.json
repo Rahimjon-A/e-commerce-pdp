@@ -19,7 +19,11 @@
   "name" : "monitor",
   "price" : 200.0,
   "categoryId" : "e2bb32de-b4f4-4aae-9310-5e56140463e8",
+<<<<<<< HEAD
   "amount" : 12,
+=======
+  "amount" : 15,
+>>>>>>> ebf30c10dd439fa714c631e92e330334f6dce157
   "createdBy" : "rahim",
   "createdAt" : 1750924904407
 }, {
@@ -35,7 +39,11 @@
   "name" : "s25",
   "price" : 1200.0,
   "categoryId" : "181e042f-b743-4ecc-8f59-35afaf63e7fc",
+<<<<<<< HEAD
   "amount" : 0,
+=======
+  "amount" : 10,
+>>>>>>> ebf30c10dd439fa714c631e92e330334f6dce157
   "createdBy" : "rahim",
   "createdAt" : 1750925016037
 } ]

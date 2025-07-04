@@ -153,18 +153,24 @@ public class Main {
         } else {
             System.out.println("Products list:");
             System.out.println("——————————————————");
-            for (Product product : products) {
+            products.forEach(product -> {
                 Category category = categoryService.getCategoryById(product.getCategoryId());
                 System.out.printf("""
-                        Name: %s
-                        Price: %S
-                        Amount: %d
-                        CreatedBy: %s
-                        CreatedAt: %s
-                        Category: %s
-                        ——————————————————
-                        \n""", product.getName(), product.getPrice(), product.getAmount(), product.getCreatedBy(), DateUtility.formatMyDate(product.getCreatedAt()), (category != null ? category.getCatName() : "Head"));
-            }
+                                Name: %s
+                                Price: %S
+                                Amount: %d
+                                CreatedBy: %s
+                                CreatedAt: %s
+                                Category: %s
+                                ——————————————————
+                                \n""",
+                        product.getName(),
+                        product.getPrice(),
+                        product.getAmount(),
+                        product.getCreatedBy(),
+                        DateUtility.formatMyDate(product.getCreatedAt()),
+                        (category != null ? category.getCatName() : "Head"));
+            });
             return true;
         }
     }
@@ -220,14 +226,19 @@ public class Main {
         List<Category> categories = categoryService.getCategories();
         System.out.println("\nCATEGORIES:");
         System.out.println("================================================");
-        for (Category category : categories) {
+
+        categories.forEach(category -> {
             System.out.printf("""
                     —— %s (ID: %s)
                        created by: %s
                        created at: %s
                        ————————————————————————————————————————————————
-                    """, category.getCatName(), category.getCatId(), category.getCreatedBy(), DateUtility.formatMyDate(category.getCreatedAt()));
-        }
+                    """,
+                    category.getCatName(),
+                    category.getCatId(),
+                    category.getCreatedBy(),
+                    DateUtility.formatMyDate(category.getCreatedAt()));
+        });
         System.out.println("================================================");
     }
 
@@ -243,7 +254,9 @@ public class Main {
         } else {
             System.out.println("Products list");
             System.out.println("------------------");
-            for (Product product : products) {
+            //   products.stream().forEach((System.out::println));
+
+            products.forEach(product -> {
                 Category productCat = categoryService.getCategoryById(product.getCategoryId());
                 System.out.printf("""
                         Name: %s
@@ -251,8 +264,11 @@ public class Main {
                         Amount: %d
                         Category: %s
                         ------------------
-                        \n""", product.getName(), product.getPrice(), product.getAmount(), (productCat != null ? productCat.getCatName() : "Head"));
-            }
+                        \n""", product.getName(),
+                        product.getPrice(),
+                        product.getAmount(),
+                        (productCat != null ? productCat.getCatName() : "Head"));
+            });
         }
     }
 
@@ -289,14 +305,7 @@ public class Main {
         while (true) {
             UUID finalId = currId;
             List<Category> categories = categoryService.getCategories();
-            List<Category> children = new ArrayList<>();
-
-
-            for (Category category : categories) {
-                if (Objects.equals(category.getParentId(), finalId)) {
-                    children.add(category);
-                }
-            }
+            List<Category> children = categories.stream().filter(category -> Objects.equals(category.getParentId(), finalId)).toList();
 
             Category currCat = categoryService.getCategoryById(finalId);
 
@@ -372,15 +381,34 @@ public class Main {
                                       №: %d
                                       ------------------
                                 """, c++);
-                        for (Order orderOrder : order.getOrders()) {
+
+                        order.getOrders().forEach(order1 -> {
                             System.out.printf("""
                                         productName: %s
                                         price: %s
                                         quantity: %s
                                         created at: %s
                                         --------------
+<<<<<<< HEAD
                                     """, orderOrder.getProductName(), orderOrder.getPrice(), orderOrder.getQuantity(), DateUtility.formatMyDate(orderOrder.getCreatedAt()));
                         }
+=======
+                                    """, order1.getProductName(),
+                                    order1.getPrice(),
+                                    order1.getQuantity());
+                        });
+//
+//                        for (Order orderOrder : order.getOrders()) {
+//                            System.out.printf("""
+//                                        prductName: %s
+//                                        price: %s
+//                                        quantity: %s
+//                                        --------------
+//                                    """, orderOrder.getProductName(),
+//                                    orderOrder.getPrice(),
+//                                    orderOrder.getQuantity());
+//                        }
+>>>>>>> ebf30c10dd439fa714c631e92e330334f6dce157
                     }
                 }
                 case 5 -> {
@@ -425,8 +453,12 @@ public class Main {
                             Order state: %s
                             ————————————————————
                             """, c++,
+<<<<<<< HEAD
                     currUser.getUserName(), (card.isOrder() ? "Ordered" : "in basket"));
 
+=======
+                    currUser.getUserName());
+>>>>>>> ebf30c10dd439fa714c631e92e330334f6dce157
             System.out.println("Products: ");
             for (Order order : card.getOrders()) {
                 totalPrice += order.getPrice() * order.getQuantity();

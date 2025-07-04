@@ -20,57 +20,54 @@ public class ProductService {
     }
 
     public boolean addProduct(Product product) {
-        for (Product product1 : products) {
-            if(product1.getName().equals(product.getName())) {
-                return false;
-            }
-        }
+        boolean isHave = products.stream()
+                .anyMatch(product1 -> product1.getName().equals(product.getName()));
+
+        if (isHave) return false;
+
         products.add(product);
         this.update();
         return true;
     }
 
     public List<Product> getProductsByCategory(Set<UUID> catsId) {
-        List<Product> catProducts = new ArrayList<>();
-        for (Product product : products) {
-            if(catsId.contains(product.getCategoryId())){
-                catProducts.add(product);
-            }
-        }
-        return catProducts;
+        return products.stream()
+                .filter(product -> catsId.contains(product.getCategoryId())).toList();
     }
 
     public boolean deleteProductByName(String name) {
-        for (Product product : products) {
-            if(product.getName().equals(name)) {
-                products.remove(product);
-                this.update();
-                return true;
-            }
-        }
-        return false;
+        boolean b = products.removeIf(product -> product.getName().equals(name));
+        if (b) this.update();
+        return b;
     }
 
-    public String addProductAmount(String name,int amount){
-        for(Product product : products) {
-            if(product.getName().equals(name )&& amount > 0) {
-                product.setAmount(product.getAmount() + amount);
-                this.update();
-                return product.getName() + " has been added new " + amount +" item.";
-            }
-        }
-        return "Product not found";
+    public String addProductAmount(String name, int amount) {
+        return products.stream()
+                .filter(product -> product.getName().equals(name) && amount > 0)
+                .findFirst()
+                .map(product -> {
+                    product.setAmount(product.getAmount() + amount);
+                    this.update();
+                    return product.getName() + " has been added new " + amount + " item.";
+                })
+                .orElse("Product not found");
+
     }
 
-    public Product getProductByName(String name,int quantity) {
-        for (Product product : products) {
-            if(product.getName().equals(name) && quantity <= product.getAmount()) {
-                product.setAmount(product.getAmount() - quantity);
-                this.update();
-                return product;
-            }
-        }
-        return null;
+    public Product getProductByName(String name, int quantity) {
+       return products.stream()
+                .filter(product -> product.getName().equals(name)&& quantity <= product.getAmount())
+                .findFirst()
+                .map(product -> {
+                    product.setAmount(product.getAmount() - quantity);
+                    this.update();
+                    return product;
+                }).orElse(null);
+    }
+
+    public void  deleteCategoryProducts(Set<UUID> ids) {
+        products.removeIf(product -> ids.contains(product.getCategoryId()));
+        this.update();
     }
 
     public void update() {
