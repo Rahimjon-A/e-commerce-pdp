@@ -87,6 +87,33 @@
     <phoneNumber>940757737</phoneNumber>
     <password>123</password>
     <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>e7536103-1adf-4d70-b4af-fc540b2ff860</userId>
+    <fullName>Jasurbek eshdavlatov</fullName>
+    <userName>User</userName>
+    <phoneNumber>23568843</phoneNumber>
+    <password>User</password>
+    <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>408aafac-e0ca-4088-a533-07ad3a081132</userId>
+    <fullName>tntg</fullName>
+    <userName>er</userName>
+    <phoneNumber>5re</phoneNumber>
+    <password>er</password>
+    <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>39e777b7-0030-4cce-ad69-6cb47ebaf50f</userId>
+    <fullName>y6t5g4rg</fullName>
+    <userName>th</userName>
+    <phoneNumber>rtg</phoneNumber>
+    <password>rth</password>
+    <role>USER</role>
     <cardId/>
   </user>
 </Users>

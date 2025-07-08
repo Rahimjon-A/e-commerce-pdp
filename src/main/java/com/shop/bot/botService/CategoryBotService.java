@@ -24,7 +24,6 @@ public class CategoryBotService {
         InlineKeyboardMarkup inlineKeyboardMarkup = markupFactory.inlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = inlineKeyboardMarkup.getKeyboard();
 
-        // 🛍 Add Get Products Button
             InlineKeyboardButton productsBtn = new InlineKeyboardButton();
         if (parentId != null) {
             productsBtn.setText("🛍 Get Products");
@@ -36,7 +35,6 @@ public class CategoryBotService {
             keyboard.add(List.of(productsBtn));
         }
 
-        // ⬅️ Back button
         if (parentId != null) {
             UUID parentOfParent = categoryService.getParentId(parentId);
 
