@@ -305,6 +305,14 @@ public class TelegramBotService extends BaseBotService {
                 cardService.update();
                 send(new SendMessage(chatId.toString(), "Cart number " + (index + 1) + " is ordered!"));
             }
+            else if (data.startsWith("CANCEL_ORDER")) {
+                String idx = data.substring(12);
+
+                CardService cardService = new CardService();
+                cardService.deleteCardById(UUID.fromString(idx));
+
+                send(new SendMessage(chatId.toString(),"Card canceled"));
+            }
             else if (data.startsWith("BACK")) {
                 String id = data.substring(4);
 
