@@ -36,6 +36,11 @@ public class CardService {
 
     }
 
+    public void deleteCardById(UUID cardId){
+       cards.removeIf(card -> card.getCardId().equals(cardId));
+        update();
+    }
+
     public void update() {
         FileUtility.saveFileToJson(CARD_FILE, cards);
     }

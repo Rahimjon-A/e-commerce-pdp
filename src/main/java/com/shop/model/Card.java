@@ -11,8 +11,10 @@ public class Card {
     private UUID userId;
     private boolean isOrder;
     private List<Order> orders;
+    private UUID cardId;
 
     public  Card() {
+        cardId = UUID.randomUUID();
         orders = new ArrayList<>();
         isOrder = false;
     }

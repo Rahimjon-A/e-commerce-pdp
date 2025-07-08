@@ -1,7 +1,6 @@
 package com.shop.bot.botController;
 
 import com.shop.bot.factory.ReplyKeyboardMarkupFactory;
-import com.shop.service.UserService;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;

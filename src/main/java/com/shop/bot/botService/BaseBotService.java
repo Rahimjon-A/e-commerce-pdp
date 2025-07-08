@@ -101,9 +101,12 @@ public abstract class BaseBotService extends TelegramLongPollingBot {
 
                 InlineKeyboardMarkup inlineBtn = new InlineKeyboardMarkup();
                 InlineKeyboardButton confirmBtn = new InlineKeyboardButton("✅ Confirm Order");
+                InlineKeyboardButton deleteCard= new InlineKeyboardButton("❌ Cancel Order");
                 confirmBtn.setCallbackData("CONFIRM_ORDER" + (c - 2));
+                deleteCard.setCallbackData("CANCEL_ORDER" + card.getCardId());
 
-                inlineBtn.setKeyboard(List.of(List.of(confirmBtn)));
+
+                inlineBtn.setKeyboard(List.of(List.of(confirmBtn,deleteCard)));
                 cartMessage.setReplyMarkup(inlineBtn);
 
                 send(cartMessage);
