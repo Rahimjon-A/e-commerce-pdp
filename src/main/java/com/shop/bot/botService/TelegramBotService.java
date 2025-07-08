@@ -163,13 +163,17 @@ public class TelegramBotService extends BaseBotService {
                 ListOfOrders(currUser, chatId);
             }
             else if (text.equals("Settings 🌐")
-                    || text.equals("Language 🌏")
-                    || text.equals("Help 🆘")
-                    || text.equals("Profile 🌄")
-                    || text.equals("About us ☕")
-                    || text.equals("Back ⬅️")) {
-                send(SettingsController.handle(text, chatId, update.getMessage().getMessageId()));
+                     || text.equals("Language 🌏")
+                     || text.equals("Help 🆘")
+                     || text.equals("Profile 🌄")
+                     || text.equals("About us ☕️")
+                     || text.equals("English")
+                     || text.equals("Uzbek")
+                     || text.equals("Russian")
+                     || text.equals("Back ⬅️")) {
+                send(SettingsController.handle(text, chatId, update.getMessage().getMessageId(), update));
             }
+
         }
         if (update.hasCallbackQuery()) {
             var callbackQuery = update.getCallbackQuery();
