@@ -70,6 +70,13 @@ public class ProductService {
         this.update();
     }
 
+    public Product getProductById(UUID id) {
+        return products.stream()
+                .filter((p) -> p.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
     public void update() {
         FileUtility.saveFileToJson(PRODUCT_FILE, products);
     }

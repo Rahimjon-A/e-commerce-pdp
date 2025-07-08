@@ -1,7 +1,7 @@
 package com.shop.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.shop.Role;
+import com.shop.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

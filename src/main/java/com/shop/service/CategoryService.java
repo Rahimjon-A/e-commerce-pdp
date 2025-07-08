@@ -13,8 +13,8 @@ public class CategoryService {
     private final List<Category> categories;
     private final ProductService productService;
 
-    public CategoryService(ProductService productService) {
-        this.productService = productService;
+    public CategoryService() {
+        this.productService = new ProductService();
         CategoryWrapper wrapper = FileUtility.loadFileFromXML(CATEGORY_FILE, CategoryWrapper.class);
         categories = wrapper != null ? wrapper.getCategories() : new ArrayList<>();
     }
@@ -72,6 +72,12 @@ public class CategoryService {
                 .filter(category -> Objects.equals(category.getParentId(), id))
                 .toList();
     }
+
+    public UUID getParentId(UUID categoryId) {
+        Category category = getCategoryById(categoryId); // implement or reuse
+        return category != null ? category.getParentId() : null;
+    }
+
 
     public void update() {
         FileUtility.saveFileToXML(CATEGORY_FILE, new CategoryWrapper(categories));

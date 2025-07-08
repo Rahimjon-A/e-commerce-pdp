@@ -33,6 +33,60 @@
     <phoneNumber>aa</phoneNumber>
     <password>aa</password>
     <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>e8d93fbc-77cd-4abc-bc38-b9cc569cb8d2</userId>
+    <fullName>rahimjon</fullName>
+    <userName>rahim123</userName>
+    <phoneNumber>12345</phoneNumber>
+    <password>12345</password>
+    <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>8a47f856-c25e-4e28-a7d3-d2d43842268b</userId>
+    <fullName>Qodirali</fullName>
+    <userName>qodirbek</userName>
+    <phoneNumber>12345</phoneNumber>
+    <password>1234</password>
+    <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>533ed910-130f-449b-89a8-e9590ab7b048</userId>
+    <fullName>Rahimjon Abduraximov</fullName>
+    <userName>qwerty</userName>
+    <phoneNumber>999999</phoneNumber>
+    <password>123</password>
+    <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>f349b8b3-7aac-42fc-9c73-c009d6346253</userId>
+    <fullName>gfdgf</fullName>
+    <userName>78mlk</userName>
+    <phoneNumber>9888</phoneNumber>
+    <password>bnnm</password>
+    <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>33fd783a-f12b-4ba7-b257-fc4a635ff444</userId>
+    <fullName>aa</fullName>
+    <userName>aaaa</userName>
+    <phoneNumber>1234</phoneNumber>
+    <password>aaaa</password>
+    <role>USER</role>
+    <cardId>00000000-0000-0000-0000-000000000000</cardId>
+  </user>
+  <user>
+    <userId>22fb9244-490b-4eb7-9e3d-91471c009be9</userId>
+    <fullName>n@email.com</fullName>
+    <userName>numonjonov</userName>
+    <phoneNumber>940757737</phoneNumber>
+    <password>123</password>
+    <role>USER</role>
     <cardId/>
   </user>
 </Users>

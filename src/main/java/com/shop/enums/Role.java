@@ -1,4 +1,4 @@
-package com.shop;
+package com.shop.enums;
 
 public enum Role {
     USER,

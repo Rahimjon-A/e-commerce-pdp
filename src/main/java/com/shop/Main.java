@@ -1,14 +1,17 @@
 package com.shop;
 
+import com.shop.bot.botService.TelegramBotService;
+import com.shop.enums.Role;
 import com.shop.model.*;
 import com.shop.service.CardService;
 import com.shop.service.CategoryService;
 import com.shop.service.ProductService;
 import com.shop.service.UserService;
 import com.shop.utility.DateUtility;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Main {
@@ -17,10 +20,18 @@ public class Main {
     static Scanner scannerStr = new Scanner(System.in);
     static UserService userService = new UserService();
     static ProductService productService = new ProductService();
-    static CategoryService categoryService = new CategoryService(productService);
+    static CategoryService categoryService = new CategoryService();
     static CardService cardService = new CardService();
 
     public static void main(String[] args) {
+
+        try {
+            TelegramBotsApi api = new TelegramBotsApi(DefaultBotSession.class);
+            api.registerBot(new TelegramBotService());
+            System.out.println("Bot is working!");
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
 
         int stepCode = 10;
         while (stepCode != 0) {
@@ -230,11 +241,11 @@ public class Main {
 
         categories.forEach(category -> {
             System.out.printf("""
-                    —— %s (ID: %s)
-                       created by: %s
-                       created at: %s
-                       ————————————————————————————————————————————————
-                    """,
+                            —— %s (ID: %s)
+                               created by: %s
+                               created at: %s
+                               ————————————————————————————————————————————————
+                            """,
                     category.getCatName(),
                     category.getCatId(),
                     category.getCreatedBy(),
@@ -260,12 +271,12 @@ public class Main {
             products.forEach(product -> {
                 Category productCat = categoryService.getCategoryById(product.getCategoryId());
                 System.out.printf("""
-                        Name: %s
-                        Price: %S
-                        Amount: %d
-                        Category: %s
-                        ------------------
-                        \n""", product.getName(),
+                                Name: %s
+                                Price: %S
+                                Amount: %d
+                                Category: %s
+                                ------------------
+                                \n""", product.getName(),
                         product.getPrice(),
                         product.getAmount(),
                         (productCat != null ? productCat.getCatName() : "Head"));
@@ -306,7 +317,9 @@ public class Main {
         while (true) {
             UUID finalId = currId;
             List<Category> categories = categoryService.getCategories();
-            List<Category> children = categories.stream().filter(category -> Objects.equals(category.getParentId(), finalId)).toList();
+            List<Category> children = categories.stream()
+                    .filter(category -> Objects.equals(category.getParentId(), finalId))
+                    .toList();
 
             Category currCat = categoryService.getCategoryById(finalId);
 
@@ -394,11 +407,11 @@ public class Main {
 
                         order.getOrders().forEach(order1 -> {
                             System.out.printf("""
-                                        prductName: %s
-                                        price: %s
-                                        quantity: %s
-                                        --------------
-                                    """, order1.getProductName(),
+                                                prductName: %s
+                                                price: %s
+                                                quantity: %s
+                                                --------------
+                                            """, order1.getProductName(),
                                     order1.getPrice(),
                                     order1.getQuantity());
                         });
@@ -461,8 +474,6 @@ public class Main {
         } else {
             System.out.println("Invalid command");
         }
-
-
     }
 
     private static void shoppingCard(User currUser) {
