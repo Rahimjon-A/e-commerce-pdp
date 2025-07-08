@@ -38,4 +38,12 @@
   "amount" : 10,
   "createdBy" : "rahim",
   "createdAt" : 1750925016037
+}, {
+  "id" : "8c0216a4-5cb0-48bd-bf8e-7f38be6a75ca",
+  "name" : "cooler",
+  "price" : 100.0,
+  "categoryId" : "f22d7d52-1673-4ace-a113-c1d1b1b0330b",
+  "amount" : 40,
+  "createdBy" : "rahim",
+  "createdAt" : 1751957604561
 } ]

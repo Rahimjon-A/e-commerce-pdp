@@ -354,10 +354,11 @@ public class TelegramBotService extends TelegramLongPollingBot {
         String pName = name.replaceAll("\\s+", "");
         String path = "./images/" + pName + ".png";
         File file = new File(path);
+
         if(file.exists()){
             return  file;
         } else {
-            return null;
+            return new File("./images/default.png");
         }
     }
 
